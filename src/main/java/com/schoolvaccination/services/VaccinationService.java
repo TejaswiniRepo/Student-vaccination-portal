@@ -5,6 +5,7 @@ import com.schoolvaccination.model.VaccinationDrive;
 import com.schoolvaccination.model.VaccinationRecord;
 import com.schoolvaccination.repository.StudentRepository;
 import com.schoolvaccination.repository.VaccinationDriveRepository;
+import com.schoolvaccination.repository.VaccinationRecordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class VaccinationService {
 
     private final StudentRepository studentRepository;
     private final VaccinationDriveRepository driveRepository;
+    private final VaccinationRecordRepository recordRepository;
 
     public Student markStudentVaccinated(String studentId, String driveId) {
         Student student = studentRepository.findById(studentId)
@@ -39,6 +41,7 @@ public class VaccinationService {
         student.getVaccinationRecords().add(record);
 
         student.setVaccinated(true);
+        recordRepository.save(record);
 
         return studentRepository.save(student);
     }
