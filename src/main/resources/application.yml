@@ -1,0 +1,3 @@
+server:
+  servlet:
+    context-path: /api/student-vaccination-portal
